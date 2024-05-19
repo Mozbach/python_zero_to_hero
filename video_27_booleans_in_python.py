@@ -1,0 +1,3 @@
+# Operators that convey either true or false
+# 1 can represent True and 0 can represent False
+# Nothin too new to learn from this...
