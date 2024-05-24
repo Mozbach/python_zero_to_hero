@@ -1,0 +1,1 @@
+# This was just a pep-talk on how awesome functions are

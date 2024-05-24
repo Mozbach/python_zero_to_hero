@@ -69,18 +69,19 @@ print(shuffleList)
 
 # deck shuffler
 deck = []
+hand = []
+grave = []
 def deckShuffle(deckSize, deck) :
     i = 0
     while i <= deckSize :
-        deck.append(i)
         i += 1
+        deck.append(i)
     shuffle(deck)
     print(deck)
 
 deckShuffle(60, deck)
 
 # Hand Draw
-hand = []
 def drawHand(deckList, drawSize) :
     i = 0
     while i <= drawSize :
@@ -90,15 +91,36 @@ def drawHand(deckList, drawSize) :
         hand.append(drawnCard)
         i += 1
 
+def drawCard(deckToDraw) :
+    drawnCard = deck.pop(-1)
+    hand.append(drawnCard)
+
+def discardCard(deckToDiscard) :
+    discardedCard = hand.pop()
+    grave.append(discardedCard)
+
+def discardHand(handToDiscard) :
+    i = 0
+    handLen = len(hand)
+    while i < handLen :
+        currentlyDiscarding = handToDiscard.pop()
+        grave.append(currentlyDiscarding)
+        i += 1
+
 drawHand(deck, 7)
 print("Hand: ", hand)
 print("Deck", deck)
+drawCard(deck)
+print("Current Hand: ", hand)
+discardHand(hand)
+print("Current Hand: ", hand)
+
 
 # My deck generator can use some more work... but now is not the time
 
 # input
 # myInput = input("What is your name?")
 # Just note, input always makes input into a string, so if you give it a number and want a number, just convert it to an int or float
-myNumInput = int(input("What is your favorite number?"))
+# myNumInput = int(input("What is your favorite number?"))
 
-print(type(myNumInput))
+# print(type(myNumInput))

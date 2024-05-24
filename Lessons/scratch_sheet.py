@@ -318,12 +318,12 @@ print(f"set5: {set5}")
 # f = open("demofile.txt", 'rt')
 
 # Open a file on the server
-f = open("myfile.txt", "r")
+f = open("C:\\Users\\crstn\\OneDrive\\Desktop\\Myprojects\\ZeroToHeroPython\\Lessons\\holdsTextFiles\\myfile.txt", "r")
 read_f = f.read()
 print(print(f"read_f: {read_f}"))
 f.seek(0)
 
-o = open("C:\\Users\\crstn\\OneDrive\\Desktop\\Myprojects\\ZeroToHeroPython\\\holdsTextFiles\\textFile.txt")
+o = open("C:\\Users\\crstn\\OneDrive\\Desktop\\Myprojects\\ZeroToHeroPython\\Lessons\\holdsTextFiles\\textFile.txt")
 read_o = o.read(6)
 print(f"read_o: {read_o}")
 
@@ -338,5 +338,247 @@ print(f.readline())
 f.readlines()
 f.seek(0)
 
+st = "Print only the words that start with s in this sentence"
+splitList = st.split()
+for x in splitList :
+    if x[0] == "s" and len(x) > 1 :
+        print(x)
+
+# use range to print even nums from 0-10
+for x in range(0, 10) :
+    if x %2 == 0 :
+        print(x)
+
+myFiftyList = [x for x in range(0, 51) if x % 3 == 0]
+print("myFiftyList", myFiftyList)
+
+# Write a function that returns the lesser of 2 given numbers if BOTH numbers are even, but returns the greater one if both numbers are odd
+
+def lesser_of_two_evens(a, b) :
+    if a % 2 == 0 and b % 2 == 0 :
+        if a < b :
+            return a
+        else :
+            return b
+    elif a %2 != 0 and b % 2 != 0:
+        if a > b :
+            return a
+        else :
+            return b
+    else :
+        pass
+
+print(lesser_of_two_evens(117, 127))
 
 
+# Write a function that takes a two-word string and returns True if both words begin with the same letter.
+def animal_crackers(text) :
+    textList = text.split()
+    if(textList[0][0] == textList[1][0]) :
+        return True
+    else : pass
+    return False
+print("Animal Crackers: ", animal_crackers("Animal Cranus"))
+
+
+# Makes Twenty: Given two integers, return true if the sum f the integers is 20 or if one of the integers is 20. If not, return false
+def makes_twenty(n1, n2) :
+    if n1 + n2 == 20 or n1 == 20 or n2 == 20 :
+        return True
+    else :
+        pass
+    return False
+print("Makes Twenty: ", makes_twenty(20, 11))
+
+# Level 1 : Problems:
+# OLD MACDONALD: Write a function that capilaizes the firs and fourth letter of a name
+# old_macdonald('macdonald') --> MacDonald
+# Note: macdonald.capitalize() returns Macdonald
+def old_macdonald(name) :
+    name.capitalize()
+    capList = list(name)
+    capList[3] = capList[3].upper()
+    return "".join(capList)
+
+print("Old Macdonald: ",old_macdonald("carsten"))
+
+# Master Yoda Give an sentence, return a sentence with the words reversed
+# def master_yoda(text) :
+#     textSplit = text.split()
+#     currentWord = ""
+#     newList = []
+#     for x in range(len(textSplit)) :
+#         currentWord = textSplit.pop()
+#         newList.append(currentWord)
+    
+#     return " ".join(newList)
+# print("Master Yoda: ", master_yoda("My name is Master Yoda"))
+
+# This below soltion is a bit better, I rate - not so long winded
+def master_yoda(text) :
+    textSplit = text.split()
+    textSplit.reverse()
+    return " ".join(textSplit)
+
+print("Master Yoda: ", master_yoda("My name is Master Yoda"))
+
+# Given an integer n, return true if n is within 10 of either 100 or 200
+#  I looked at the answer - my moron brain just could not
+def almost_there(n) :
+    return((abs(100 - n) <= 10) or (abs(200 - n) <= 10))
+# Why do they insist on using abs, though - why does it matter? - Just in case a negative number is assigned? Still stupid because why will the given negative number be considered in range of 100 or 200, since it most definitely is no... Seems like google's search results where they would take your search request, mess with it behind the scenes to basically be like "I think what you meant to search was this...."
+print(almost_there(198))
+# FAILED the above!
+
+# Level 2, Problems:
+# Find 33:
+# Given a list of ints, return True if the array contains a 3 next to a 3 somewhere
+# first idea: if [i] == 3 and [i + 1] == 3 (this won't directly work... but something like this)
+# def find33(givenList) :
+#     i = 0
+#     while i < len(givenList) :
+#         if givenList[i] == 3 :
+#             prevNum = i - 1
+#             nextNum = i + 1
+#             if givenList[prevNum] == 3 or givenList[nextNum] == 3 :
+#                 return True
+#         else :
+#             pass
+#         i += 1
+#         return "No 3's next to a 3"
+    
+# print("Find33: " , find33([1, 2, 3, 3, 4, 5, 6]))
+# Bitching out on this one - here is the answer
+def has_33(nums) :
+    for i in range(0, len(nums)-1) :
+        # I prefer this version, the "real" solution is too unreadable
+        if nums[i] == 3 and nums[i+1] == 3 : # This is essentially what I tried... just a dumber version of this - I didn't know one can do math within square brackets... This isn't working..though
+            return True
+        
+        # This is the version I don't really like - but I will try and break it down for myself.
+        # if nums[i:i+2] == [3,3] : return True
+        # Again, math within the square brackets. Come now Carsten, don't be so hard on yourself
+        
+    return False
+has_33_list = [1,2,3,3,4,5,10,3,5,2,3,3,12]
+print("Has 33!" , has_33(has_33_list))
+# Totally cheated on this one... my brain is just not nailing the logic.
+
+
+
+# Paper doll... I already see no way out.
+# Given a string, return a string where for every character in the original, there are three characters.: "Apples" = "AAApppllleeesss"
+def paper_doll(text) :
+    result = ''
+    for x in text :
+        result += x * 3
+    return result # And I know you can multiply chars, it is just like my mind does not WANT to come up with solutions anymore
+
+# Blackjack - Im looking forward to this one
+# Given three integers between 1 and 11 >
+# if their sum is less than or equal to 21, return their sum.
+# If their sum exceeds 21 and there is an eleven, reduce the total sum by 10.  
+# Finally, if the sum, even after adjustment, exceesds 21, return 'BUST'
+
+def blackjack(a,b,c):    
+    if sum((a, b, c)) <= 21 :
+        return sum((a, b, c))
+    elif sum((a, b, c)) > 21 and 11 in (a, b, c) :
+        return sum((a, b, c)) - 10
+    elif sum((a, b, c)) > 21 and 11 not in (a, b, c) :
+        return "BUST!"
+    else :
+        pass
+print(blackjack(2, 11, 5))
+
+# Ok, my blackjack works - now lets see the ways of the master:
+# Ok I see he already used an in operator to make things a bit clearer... But he used <=31, which isn't wrong but not how my brain works...
+
+def blackjack2(a, b, c) :
+    if sum((a, b, c)) <= 21 :
+        return sum((a, b, c))
+    elif sum((a, b, c)) <= 31 and 11 in (a, b, c) :
+        return sum((a, b, c)) - 10
+    else :
+        return 'BUST'
+    
+
+# Summer of 69: Return the sum of the numbers in the array, except ignore section of the numbers starting with a 6 and extending to the next 9. Every 6 will be followed by at least 1 9. Return 0 for no numbers
+#  I immediately went to the solution of this one. Just, working with lists is a bit new for this.
+def summer_69(arr) :
+    total = 0
+    add = True
+    for num in arr:
+        while add:
+            if num != 6:
+                total += num
+                break
+            else :
+                add = False
+        while not add:
+            if num != 9:
+                break
+        else :
+            add = True
+            break
+    return total
+
+# SPy Game: Write a function that takes in a list of integers and returns True if it contains 007 in order
+
+def spy_game(nums) :
+    for i in range(0, len(nums) -1) :
+        if nums[i] == 0 and nums[i + 1] == 0 and nums[i + 2] == 7 :
+            return True
+        else :
+            pass
+    return False
+print("Spy Game: ", spy_game([1,2,7,0,0,7,5]))
+# Nailed this one - Nope... Turns out we will get an "Out of Range" error if the final int is a 0... Makes sense because it will try check for the next step and see it can't. So, cute and almost there, but their solution covers all bases. Still so confused about the 'x' in the code list. Because I pass all checks without it.
+
+# Here is their solution:
+def spy_game2(nums) :
+    code = [0, 0, 7, 'x']
+    for num in nums :
+        if num == code[0]:
+            code.pop(0)
+    return len(code) == 1
+# Lets break theirs down.
+# they create a code list which will be used to match the sequence
+# they then in a for loop, num in nums, checks if num == code[0]... then pops code(0).
+# I dont understand the 'x' and I don't understand the return. I will have to zoom in on it during explanations - I am registering my code, though. In this case, sure it is not as cool, but I understand it fully
+# Still so confused about the 'x' in the code list. Because I pass all checks without it.
+
+# Count Primes. Write a function that returns the number of prime numbers that exist upt and including a given number... 
+# My non-Mathematical brain had to first try and register what a prime number is.
+# A prime number is a number which you can't equate to by multiplying anything by anything else except 1. Like, for example, 1x5, 1x11, 7x1... Now I just need to find a way to translate that into a function.
+# Alternatively, it is a number that can't be divided by any whole number except for itself. 
+# I also see you can put it as "prime numbers only has 2 factors, itself and 1", others have like 3... So it must be something that can be times by itself to get a number... x * x = XX... but y * y will never = YY
+
+# First try to make list of a range - done
+
+def count_primes(num) :
+    primes = [2]
+    x = 3
+    if num < 2: # for case of num = 0 or 1
+        return 0
+    while x <= num :
+        for y in range(3, x, 2): #test all odd factors up to x-1
+            if x % y == 0:
+                x += 2
+                break
+        else :
+            primes.append(x)
+            x += 2
+    print(primes)
+    return len(primes)
+print("Primes:", count_primes(50))
+    # Whole function basically goes over my head - so I need to focus on the review
+
+# Then there is the Big Letter one, which in all honesty was not really explained all to  well - because the solution is not even how I understood the question
+def print_big(letter) :
+    patterns = {1: "  *  ", 2: " * * ", 3: "*   *", 4: "*****", 5: "**** " ,6: "   * ", 7:" *   ", 8: "*   *", 9: "*    " }
+    alphabet = {'A':[1,2,4,3,3],'B':[5,3,5,3,5],'C':[4,9,9,9,4],'D':[5,3,3,3,5],'E':[4,9,4,9,4]}
+    for pattern in alphabet[letter.upper()]:
+        print(patterns[pattern])
+
+print(print_big("B"))
