@@ -9,11 +9,11 @@
 # Step 3: If both are even, return minimum between the two
 # Step 4: Else if both or one is odd, return maximum between the two
 
-def lesser_of_2_evens(n1, n2) :
-    if n1 %2 == 0 and n2 % 2 == 0 :
-        return "MINIMUM: ", min(n1, n2)
+def lesser_of_2_evens(num1, num2) :
+    if num1 % 2 == 0 and num2 % 2 == 0 :
+        return min(num1, num2) 
     else :
-        return "MAXIMUM" , max(n1, n2)
+        return max(num1, num2)
 
 print("Lesser of 2 evens: ", lesser_of_2_evens(10, 11))
 print("Lesser of 2 evens: ", lesser_of_2_evens(10, 12))
@@ -22,8 +22,8 @@ print("Lesser of 2 evens: ", lesser_of_2_evens(10, 12))
 # Step 1: Create a function with a string-based argument
 # Step 2: Make a list out of the argument, lower-case everythin as it enters the list.
 # Step 3: Check if the first letter in the first word matches with the first letter in the second word - one line is all that you need.
-def animal_crackers(stringArg) :
-    stringList = stringArg.lower().split()
+def animal_crackers(stringHere) :
+    stringList = stringHere.lower().split()
     return stringList[0][0] == stringList[1][0]
 
 print("Animal Crackers: ", animal_crackers("lewende lied"))
@@ -32,6 +32,7 @@ print("Animal Crackers: ", animal_crackers("lewende miet"))
 # 3: Makes Twenty: Given two integers, return True if the sum of the integers is 20 or if one of the integers is 20. If not, return False.
 # Step 1: Make a function that takes in two arguments
 # Step 2: I would normally use an if/else statement to do this, but remember, only one line is needed if you are checking if some boolean statement is returning a boolean.
+
 def makes_twenty(*args) :
     return sum(args) == 20 or 20 in args
 
@@ -46,10 +47,12 @@ print("Makes Twenty? ", makes_twenty(20, 10))
 # Step 2: Going for the function that requires the highest level indexing and the least amount of code
 # Step 3: Create two variables,  one getting characters from 1-3, and the other getting characters from 4 onward
 # Step 4: return the first variable, capitalizing the first letter within, and then within the same line, return the second variable, capitalizing the first letter within
-def old_macdonald(name) :
-    firstBit = name[:3]
-    secondBit = name[3:]
+
+def old_macdonald(nameString) :
+    firstBit = nameString[:3]
+    secondBit = nameString[3:]
     return firstBit.capitalize() + secondBit.capitalize()
+        
 
 print("Old Macdonald: ", old_macdonald("oldmacdonald"))
 print("Old Macdonald: ", old_macdonald("hanjose"))
@@ -60,26 +63,26 @@ print("Old Macdonald: ", old_macdonald("hanjose"))
 # Step 2: Create a list of the sentence, effectively making a list entry of each word
 # Step 3: Reverse the word list using indexing (easy)
 # Step 4: Return a string version of the list
-def master_yoda(string) :
-    stringList = string.split()
-    stringList = stringList[::-1]
-    return " ".join(stringList).capitalize()
+def master_yoda(sentence) :
+    splitString = sentence.split()
+    splitString = splitString[::-1]
+    return " ".join(splitString).capitalize()
 
-print("Master Yoda Says: ", master_yoda("Master this, master your reality, conquer your future."))
+print("Master Yoda Says: ", master_yoda("You will master this and conquer your reality."))
 
 # 3: Almost There: given an integer, return True if it is within 10 of either 100 or 200
 # Step 1: Write a function named almost_there, taking a numerical argument - n
 # Step 2: Return True using absolute numbers, comparison operators and logical operators
 # Trying to explain this to myself: 100 - number is less than or equal to 10, OR if 200 - number less than or equal to ten > Really simple, actually. It will then naturally return True if true and False if not. Really, really not hard. Sad this took me so long
-def almost_there(n) :
-    return ((abs(100 - n) <= 10) or (abs(200 - n) <= 10)) 
+
+def almost_there(num) :
+    return ((abs(100 - num) <= 10) or (abs(200 - num) <= 10))
 
 print("Is ten within range of given int: " , almost_there(80))
 print("Is ten within range of given int: " , almost_there(190))
 print("Is ten within range of given int: " , almost_there(198))
 
 # Third Section |---\_Function Practice Level 2_/---|
-# This is the whoore 
 
 # 1: Find 33: given a list of ints, return True if the array contains a 3 next to a 3 somewhere
 # I am again going for the version using the highest level of array indexing for practice purposes
@@ -88,10 +91,12 @@ print("Is ten within range of given int: " , almost_there(198))
 # Step 3: Within the loop, if i and the i next to it is 3 and 3, return true
 # In hindsight - this is actually pretty simple
 def find_33(numList) :
-    for i in range(0, len(numList) - 1) :
+    for i in numList :
         if numList[i : i + 2] == [3, 3] :
             return True
     return False
+
+
 print(find_33([1, 3, 3]))
 print(find_33([1, 3, 1, 3]))
 print(find_33([3, 1, 3]))
@@ -100,12 +105,11 @@ print(find_33([3, 1, 3]))
 # Step 1: Create a function named paper_doll, taking a String argument
 # Step 2: create an empty string
 # Step 3: Using a for loop, loop the string parameter, making 2 copies (to total three) of each character, and adding them to the empty string
-def paper_dolls(string) :
+def paper_dolls(sentenceHere) :
     newString = ""
-    for i in string :
+    for i in sentenceHere :
         newString += i * 3
     return newString
-
 print("Paper Dolls: ", paper_dolls("Love for her stands, obsession dwindled"))
 
 # 3: BlackJack: Given three integers between 1 and 11, if their sum is less than or equal to 21, return their sum. If their sum exceeds 21 and there is an eleven, return their sum - 10, Finally, if the sum, even after adjustments, exceeds 21, return 'BUST'
@@ -117,15 +121,16 @@ print("Paper Dolls: ", paper_dolls("Love for her stands, obsession dwindled"))
 # 5: If the total is less than or equal to 21, make the score the total
 # 6: Return the score...
 # Overall not a difficult solution, but it sure is an obscure approach. This is where experience communicates
+
 def black_jack(*args) :
     total = sum(args)
-    score = "Bust!"
-    if 11 in args or total <= 31 :
+    score = "BUST!"
+    if 11 in args or args <= 31 :
         score = total - 10
     if total <= 21 :
         score = total
     return score
-    
+
 print("BlackJack: ", black_jack(3, 5, 11))
 print("BlackJack: ", black_jack(3, 10, 11))
 
@@ -138,6 +143,7 @@ print("BlackJack: ", black_jack(3, 10, 11))
 # Step 6: Then, create another while, checking if the boolean is False, then if the current iteration is not 9, break out of the loop
 # Step 7: Else -> Make the boolean True, then break out of the loop
 # Step 8: Finally, return the variable origionally set up to hod 0, but now holds the total we are looking for
+
 def summer_69(numList) :
     total = 0
     the_bool = True
@@ -155,7 +161,7 @@ def summer_69(numList) :
                 the_bool = True
                 break
     return total
-
+# 
 print("My Summer 69: ", summer_69([2, 1, 6, 9, 11]))
 print("My Summer 69: ", summer_69([4, 5, 6, 7, 8, 9]))
 print("My Summer 69: ", summer_69([1, 3, 5]))
@@ -168,17 +174,17 @@ print("My Summer 69: ", summer_69([1, 3, 5]))
 # Step 2: Create a code list, containing the 007 that we will be looking for - also, add a string to be the break
 # Step 3: Create a for loop, looping over the argument list, then check if the current iteration of the list is the first number in the code list, if so, pop the first item in the code list
 # Step 4: Return True once the length of the code list is 1. It should automatically return false
-def spy_game(spyList) :
-    codeList = [0, 0, 7, "x"]
-    for i in spyList :
-        if i == codeList[0] :
-            codeList.pop(0)
-    return len(codeList) == 1
+def spy_game(numList) :
+    spy_list = [0, 0, 7, 'x']
+    for i in numList :
+        if i == spy_list[0] :
+            spy_list.pop(0)
+    return len(spy_list) == 1
 
 print("My Spy Game: ", spy_game([1,2,4,0,0,7,5])) 
 print("My Spy Game: ", spy_game([1,0,2,4,0,5,7])) 
 print("My Spy Game: ", spy_game([1,7,2,0,4,5,0])) 
-
+# 
 # 2: Count Primes: Write a function that returns the number of prime numbers that exist up to and including a given number. By convention, 0 and 1 are not prime
 # Step 1: Create a function named count_primes, taking a single int as argument
 # Step 2: Check if the number is 0 or 1, if so, return 0
@@ -192,7 +198,6 @@ print("My Spy Game: ", spy_game([1,7,2,0,4,5,0]))
 # Step 10: Within the else, take x and add it to the list, because it is then prime, then add 2 to x
 # Step 11: Print the list of primes
 # Step 12: Return the length of the primes list
-
 def count_primes(num) :
     if num == 1 or num == 0 :
         return 0
@@ -204,11 +209,11 @@ def count_primes(num) :
                 x += 2
                 break
         else :
-            primes.append(x) 
+            primes.append(x)
             x += 2
     print(primes)
     return len(primes)
-
+# 
 print("Counting Primes 10: ", count_primes(10))
 print("Counting Primes 20: ", count_primes(20))
 print("Counting Primes 30: ", count_primes(30))
