@@ -81,6 +81,7 @@ def unique_list(lst) :
             x.append(a)
     return x
 # Ok, well here I beat their asses
+# Their solution is still cool, though. Because it actively checks if the number was seen or not, and theon only appends if it is a new number not already in the list
 
 # Write a Python function to multiply all the numbers in a list
 def myMultiply(numbers) :
