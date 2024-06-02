@@ -1,7 +1,7 @@
 # GLOBALS
 the_board = ['#' , '1' , '2' , '3' , '4' , '5' , '6' , '7' , '8' , '9']
-player1 = ""
-player2 = ""
+player1 = "" #This actually == the X or O
+player2 = "" #This actually == the X or O
 current_player = "player1"
 
 winning_dict = {
@@ -34,21 +34,21 @@ def display_board(board) :
 
 def player_placement(player1, player2, board) :
     global current_player
-    current_player = "player1"
+    current_player = "Player 1"
     taken_slot = []
     player_1_slots = []
     player_2_slots = []
     winner = False
 
     while winner == False :
-        if current_player == "player1" :
+        if current_player == "Player 1" :
             print(f"Player1, please choose where to place the {player1}")    
             player_choice = input("Please select a slot from 1 - 9: ")
             the_choice = int(player_choice)
             taken_slot.append(f"Player 1 Took : {the_choice} .")
             player_1_slots.append(the_choice)
             the_board[the_choice] = player1
-            current_player = "player2"
+            current_player = "Player 2"
             print("Taken Slots: ", taken_slot)
             print(f"Current Player Turn: {current_player}")
             print(display_board(board))
@@ -58,13 +58,13 @@ def player_placement(player1, player2, board) :
                 break
             
         else :
-            print(f"Player2, please choose where to place the {player2}")
+            print(f"Player 2, please choose where to place the {player2}")
             player_choice = input("Please select a slot from 1 - 9: ")
             the_choice = int(player_choice)
             taken_slot.append(f"Player 2 Took : {the_choice} .")
             player_2_slots.append(the_choice)
             the_board[the_choice] = player2
-            current_player = "player1"
+            current_player = "Player 1"
             print("Taken Slots: ", taken_slot)
             print(f"Current Player Turn: {current_player}")
             print(display_board(board))
