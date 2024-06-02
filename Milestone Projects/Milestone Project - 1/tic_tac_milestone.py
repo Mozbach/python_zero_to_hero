@@ -34,11 +34,12 @@ def display_board(board) :
 
 def player_placement(player1, player2, board) :
     global current_player
+    current_player = "player1"
     taken_slot = []
     player_1_slots = []
     player_2_slots = []
     winner = False
-    # while checkWinning(player_1_slots, winning_dict) == False or checkWinning(player_2_slots, winning_dict) == False :
+
     while winner == False :
         if current_player == "player1" :
             print(f"Player1, please choose where to place the {player1}")    
