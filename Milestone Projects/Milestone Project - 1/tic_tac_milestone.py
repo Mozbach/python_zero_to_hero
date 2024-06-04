@@ -78,7 +78,7 @@ def player_input() :
     marker = ""
     # Keep asking player 1 to choose X or O
     while marker != 'X' and marker != 'O' :
-        marker = input("PLayer 1, choose X or O...")
+        marker = input("Player 1, choose X or O...")
     # Assign Player 2 the oposite marker
     global player1
     global player2
