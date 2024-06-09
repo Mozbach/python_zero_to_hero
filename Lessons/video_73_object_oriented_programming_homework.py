@@ -5,6 +5,12 @@ class Line :
         self.coor1 = coor1
         self.coor2 = coor2
 
+        # Alternative unpacking: 
+        # self.x1 = coor1[0]
+        # self.x2 = coor2[0]
+        # self.y1 = coor1[1]
+        # self.y2 = coor2[1]
+
     def distance(self) :
         # x1 = self.coor1[0]
         # y1 = self.coor2[0]
@@ -96,7 +102,7 @@ class Cylinder() :
     pi = 3.14
     def __init__(self, height = 1, radius = 1) :
         self.height = height
-        self.width = radius
+        self.radius = radius
 
     def volume(self) :
         return self.pi * (self.radius ** 2) * self.height
@@ -104,7 +110,7 @@ class Cylinder() :
     def surface_area(self) :
         return ((2 * self.pi) * (self.radius ** 2) + (2 * self.pi) * (self.radius * self.height))
 
-ytCylinder = Cylinder(height = 8, width = 3)
+ytCylinder = Cylinder(height = 8, radius = 3)
 print(f"ytCylinder Volume: {ytCylinder.volume()}")
 
 courseCylinder = Cylinder(height = 2, radius = 3)
