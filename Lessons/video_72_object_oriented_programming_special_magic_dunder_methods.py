@@ -45,5 +45,3 @@ print(myDict)
 
 
 # Yes, you can delete entries in a dictionary...
-
-
