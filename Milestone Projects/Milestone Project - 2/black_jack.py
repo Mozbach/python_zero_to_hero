@@ -79,7 +79,7 @@ class Card() :
 class Deck() :
     def __init__(self) :
         self.all_cards = []
-        for suit in suits : # For each suit - give a rank 1 - 11 - Trying to think now if Ace will have some sort of problem with being 1 or 11... I do believe I can run a check and change the value on the fly using an if statement.
+        for suit in suits : 
             for rank in ranks :
                 created_card = Card(suit, rank)
                 self.all_cards.append(created_card)
@@ -105,6 +105,7 @@ class Player() :
         self.player_hand_total = 0
         self.player_chips = 50
         self.player_bet = 0
+        self.ace_check = False # If this is on False, it will -10 the hand_total if there was an ace in the hand with the first 2 cards. 
 
     def bet_chips(self) :
         try :
@@ -112,7 +113,7 @@ class Player() :
             if chips_to_bet > self.player_chips :
                 print(f"{self.player_name}, you don't have enough chips. Please enter a maximum of {self.player_chips}.")
                 chips_to_bet
-                player_bet += chips_to_bet
+                self.player_bet += chips_to_bet
             else :
                 self.player_bet = chips_to_bet
                 self.player_chips -= chips_to_bet
@@ -122,13 +123,14 @@ class Player() :
 
     def hit_me(self) :
         drawn_card = black_jack_deck.deal_one()
-        if drawn_card.rank == 'Ace' and the_player.player_hand_total > 21 :
+        if drawn_card.rank == 'Ace' and self.player_hand_total >= 11 : # This works for the additionally drawn cards, not the one that was there from the first pair
             drawn_card.value = 1
-        if the_player.player_hand_total > 21 :
-            for i in the_player.player_hand :
-                if i.rank == 'Ace' and i.counter == True :
-                    i.counter = False
-                    i.value = 1
+# Currently - This might work... but this runs BEFORE we actually know what the value of the next card will be. So it remains on 11, then draws the card and gives the result.
+            if self.player_hand_total > 21 and self.ace_check == False:
+                for i in self.player_hand[:2] :
+                    if i.rank == 'Ace' :
+                        self.player_hand_total - 10
+                        self.ace_check = True
 
         self.player_hand.append(drawn_card)
 
@@ -140,21 +142,36 @@ class Dealer() :
     def __init__(self) :
         self.dealer_hand = []
         self.dealer_hand_total = 0
+        self.ace_check = False
+
+    def hit_dealer(self) :
+       drawn_card = black_jack_deck.deal_one()
+       if drawn_card.rank == 'Ace' and self.dealer_hand_total >= 11 :
+           drawn_card.value = 1
+           if self.dealer_hand_total > 21 and self.ace_check == False:
+                for i in self.dealer_hand[:2] :
+                    if i.rank == 'Ace' :
+                        self.dealer_hand_total - 10
+                        self.ace_check = True
+                        
+       self.dealer_hand.append(drawn_card)
 
     def deal(self) :
         while len(self.dealer_hand) < 2 :
             the_player.hit_me()
             # the_player.player_hand.append(black_jack_deck.deal_one())
-            self.dealer_hand.append(black_jack_deck.deal_one())
+            # self.dealer_hand.append(black_jack_deck.deal_one())
+            self.hit_dealer()
 
     def dealer_self_deal(self) :
         print(f"self.dealer_hand[0]: {self.dealer_hand[0]}")
         for i in self.dealer_hand :
+            # This first if needs to happen, otherwise he will hit if he opens on 17. So basically, a calculation of the hand total is made, then the while loop starts.
             if i.counted == False :
                 self.dealer_hand_total += i.value
                 i.counted = True
         while self.dealer_hand_total < 17 :
-            self.dealer_hand.append((black_jack_deck.deal_one()))
+            self.hit_dealer()
             for i in self.dealer_hand :
                 if i.counted == False :
                     self.dealer_hand_total += i.value
@@ -193,13 +210,13 @@ def show_dealer_starting_card() :
 def show_dealer_cards() :
     print("*****-----*****-----*****")
     print("The Dealer's Face Up Card: ")
-    
+
     for i in the_dealer.dealer_hand :
         print(i)
         if i.counted == False :
             the_dealer.dealer_hand_total += i.value
             i.counted = True
-            
+
     print(f"the_dealer.dealer_hand_total : {the_dealer.dealer_hand_total}\n")
 
 def check_to_play(player_name) :
@@ -241,25 +258,30 @@ while game_on :
         the_dealer.dealer_self_deal()
         show_dealer_cards()
         if the_dealer.dealer_hand_total > 21 :
-            print(f"{player_name}, you win.")
+            print(f"{player_name}, you win. from first if under S")
             player_won = True
             pay_player(player_bet, player_chips, player_won)
             print(f"Player Chip Count: {player_chips}")
+            break
         elif the_dealer.dealer_hand_total == the_player.player_hand_total :
             print(f"{player_name}, It was a Push!")
             break
-        elif the_dealer.dealer_hand_total < the_player.player_hand_total and the_dealer.dealer_hand_total <= 17 and the_dealer.dealer_hand_total < 21 :
-            print(f"{player_name}, you win.")
+        elif the_dealer.dealer_hand_total < the_player.player_hand_total and the_dealer.dealer_hand_total <= 17  :
+            print(f"{player_name}, you win. From elif under PUSH elif")
             player_won = True
             pay_player(player_bet, player_chips, player_won)
             print(f"Player Chip Count: {the_player.player_chips}")
+            break
         else :
             print(f"{player_name}, you lose. - From Final Else")
-        break
+            break
     if hit_or_stay != 'H' or hit_or_stay != 'S' :
         print("Please provide a valid input for Hit or Stand, either 'H' or 'S'.")
         hit_or_stay
 
 # Problem right now is that Dealer will draw if he is on 17. He should stay on 17
 
+# I am continuing with the course in the meantime, it feels like I am losing valuable time because of this lesson, and I really don't want to look at the answer.
+
+# Currently, the problem with changing the Ace to 1 ... I am successfully changing NEW DRAWN cards to an Ace. But the one that was there during the initial draw sequence does not change.
 # print(f"Things I still need to do:\n-Change ace to act as either 11 or 1.\n-Work in the Betting amount.\n-Request if the player wants to play again or leave.\n-BONUS1: Save ending chip-count to a txt file.\nBonus2: Partition all all methods and use them within the main file.")
