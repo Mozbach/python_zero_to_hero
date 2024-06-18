@@ -41,3 +41,5 @@ Nah... this will still reduce the value too much when another ace and another ac
 
 We can do this by having a boolean that starts on false, then if this happened once already, it changes to true
 """
+
+print(f"Square of 8: {8 ** 2}")

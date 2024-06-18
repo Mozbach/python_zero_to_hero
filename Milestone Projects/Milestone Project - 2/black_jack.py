@@ -164,6 +164,7 @@ class Dealer() :
             self.hit_dealer()
 
     def dealer_self_deal(self) :
+        value_holder = []
         print(f"self.dealer_hand[0]: {self.dealer_hand[0]}")
         for i in self.dealer_hand :
             # This first if needs to happen, otherwise he will hit if he opens on 17. So basically, a calculation of the hand total is made, then the while loop starts.
@@ -192,13 +193,16 @@ def pay_player(player_bet, player_chips, player_won) :
 # just shows the current cards on the table including the dealer's face up card
 # I don't really like that the math for the cards is happening here... But I guess it doesn't matter.
 def show_player_cards() :
+    value_holder = []
     print("*****-----*****-----*****")
     print(f"{player_name}'s Hand: ")
     for i in the_player.player_hand :
         print(i)
-        if i.counted == False :
-            the_player.player_hand_total += i.value
-            i.counted = True
+        value_holder.append(i.value)
+        the_player.player_hand_total = sum(value_holder)
+        # if i.counted == False :
+        #     the_player.player_hand_total += i.value
+        #     i.counted = True
 
     print(f"{player_name}'s Hand Total is: {the_player.player_hand_total}")
 
@@ -208,14 +212,17 @@ def show_dealer_starting_card() :
     print(the_dealer.dealer_hand[0])
 
 def show_dealer_cards() :
+    value_holder = []
     print("*****-----*****-----*****")
     print("The Dealer's Face Up Card: ")
 
     for i in the_dealer.dealer_hand :
         print(i)
-        if i.counted == False :
-            the_dealer.dealer_hand_total += i.value
-            i.counted = True
+        value_holder.append(i.value)
+        the_dealer.dealer_hand_total = sum(value_holder)
+        # if i.counted == False :
+        #     the_dealer.dealer_hand_total += i.value
+        #     i.counted = True
 
     print(f"the_dealer.dealer_hand_total : {the_dealer.dealer_hand_total}\n")
 
@@ -285,3 +292,8 @@ while game_on :
 
 # Currently, the problem with changing the Ace to 1 ... I am successfully changing NEW DRAWN cards to an Ace. But the one that was there during the initial draw sequence does not change.
 # print(f"Things I still need to do:\n-Change ace to act as either 11 or 1.\n-Work in the Betting amount.\n-Request if the player wants to play again or leave.\n-BONUS1: Save ending chip-count to a txt file.\nBonus2: Partition all all methods and use them within the main file.")
+
+# Combine the below with my new way of getting the totals
+# So check this... for i in hand, if i .rank == ace and total > 21, i.value = 1
+
+#  I admit defeat...
