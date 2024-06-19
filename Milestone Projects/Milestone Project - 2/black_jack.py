@@ -258,29 +258,33 @@ while game_on :
         show_player_cards()
         show_dealer_starting_card()
         if the_player.player_hand_total > 21 :
-            print(f"{player_name}, you lose. - From  if the_player.player_hand_total > 21 :")
+            print(f"{player_name}, you lose. - Your {the_player.player_hand_total} BUSTED! :")
             break
     hit_or_stay
     if hit_or_stay == 'S' :
         the_dealer.dealer_self_deal()
         show_dealer_cards()
+
         if the_dealer.dealer_hand_total > 21 :
-            print(f"{player_name}, you win. from first if under S")
+            print(f"{player_name}, you win. from first if under S - Dealer Busted")
             player_won = True
             pay_player(player_bet, player_chips, player_won)
             print(f"Player Chip Count: {player_chips}")
             break
-        elif the_dealer.dealer_hand_total == the_player.player_hand_total :
-            print(f"{player_name}, It was a Push!")
+
+        elif the_dealer.dealer_hand_total > the_player.player_hand_total :
+            print(f"{player_name}, You lose.. Your {the_player.player_hand_total} vs the_dealer's {the_dealer.dealer_hand_total}")
             break
-        elif the_dealer.dealer_hand_total < the_player.player_hand_total and the_dealer.dealer_hand_total <= 17  :
-            print(f"{player_name}, you win. From elif under PUSH elif")
+
+        elif the_dealer.dealer_hand_total < the_player.player_hand_total :
+            print(f"{player_name}, You win! You had {the_player.player_hand_total} VS the Dealer's {the_dealer.dealer_hand_total}")
             player_won = True
             pay_player(player_bet, player_chips, player_won)
             print(f"Player Chip Count: {the_player.player_chips}")
             break
+
         else :
-            print(f"{player_name}, you lose. - From Final Else")
+            print(f"{player_name}, this was probably a push... Your {the_player.player_hand_total} vs the_dealer's {the_dealer.dealer_hand_total}")
             break
     if hit_or_stay != 'H' or hit_or_stay != 'S' :
         print("Please provide a valid input for Hit or Stand, either 'H' or 'S'.")
