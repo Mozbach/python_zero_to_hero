@@ -62,14 +62,6 @@ class Hand() :
             self.value -= 10
             self.aces -= 1
 
-test_player = Hand()
-pulled_card = test_deck.deal()
-print(f"Pulled Card: {pulled_card}")
-test_player.add_card(pulled_card)
-test_player.add_card(test_deck.deal())
-print(f'Card Value: {test_player.value}')
-
-
 class Chips() :
     def __init__(self, total = 100) :
         self.total = total
@@ -120,7 +112,7 @@ def hit_or_stand(deck, hand) :
 # When the game starts, and after each time Player takes a card, the dealer's card is hidden and all of Player's cards are visible. At the end of the hand all cards are shown, and you may want t show each hand't total value.
 def show_some(player, dealer) :
     # Show only one of the dealer's cards
-    print("\n Dealer's Hand: ")
+    print("\nDealer's Hand: ")
     print("First card hidden!")
     print(dealer.cards[1])
 
@@ -200,31 +192,34 @@ while True :
             player_busts(player_hand, dealer_hand, player_chips)
             break
 
-        # If the player hasn't busted, play Dealer's hand until the dealer reaches 17
-        if player_hand.value <= 21 :
-            while dealer_hand.value < 17 :
-                hit(deck, dealer_hand)
+    # If the player hasn't busted, play Dealer's hand until the dealer reaches 17
+    if player_hand.value <= 21 :
+        while dealer_hand.value < 17 :
+            hit(deck, dealer_hand)
 
-            # Show all cards
-            show_all(player_hand, dealer_hand)
+        # Show all cards
+        show_all(player_hand, dealer_hand)
 
-            # Run different winning scenarios
-            if dealer_hand.value > 21 :
-                dealer_busts(player_hand, dealer_hand, player_chips)
-            elif dealer_hand.value > player_hand.value :
-                dealer_wins(player_hand, dealer_hand, player_chips)
-            elif dealer_hand.value < player_hand.value :
-                player_wins(player_hand, dealer_hand, player_chips)
-            else :
-                push(player_hand, dealer_hand)
+        # Run different winning scenarios
+        if dealer_hand.value > 21 :
+            dealer_busts(player_hand, dealer_hand, player_chips)
 
-        # inform player of their chips total
-        print(f"\nPlayer total chips are at: {player_chips.total}.")
-        #  Ask to play again:
-        new_game = input("Would you like to play again? y/n?")
-        if new_game[0].lower() == 'y' :
-            playing = True
-            continue
+        elif dealer_hand.value > player_hand.value :
+            dealer_wins(player_hand, dealer_hand, player_chips)
+
+        elif dealer_hand.value < player_hand.value :
+            player_wins(player_hand, dealer_hand, player_chips)
+
         else :
-            print("Thanks for playing.")
-            break
+            push(player_hand, dealer_hand)
+
+    # inform player of their chips total
+    print(f"\nPlayer total chips are at: {player_chips.total}.")
+    #  Ask to play again:
+    new_game = input("Would you like to play again? y/n?")
+    if new_game[0].lower() == 'y' :
+        playing = True
+        continue
+    else :
+        print("Thanks for playing.")
+        break
