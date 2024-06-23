@@ -40,21 +40,11 @@ Good luck!
 # phone_number_pattern = re.finditer(r"\d{3}-\d{3}-\d{4}", instructions) # See here, instructions in the loop will be the opened file.
 # Make an object out of the result using finditer
 # The below works to traverse the folders, I am just uncommenting it to avoid the chaos in the terminal
-
+pattern = r"\d{3}-\d{3}-\d{4}"
 for folder, subfolders, files in os.walk(challenge_file_dir) :
-    print(f"Folder Name: {folder}")
-    print("Files in Folder: ")
     for file in files :
         target_file = f"{folder}\{file}"
 
         opened_file = open(target_file, "r").read()
-        for match in re.finditer(r"\d{3}-\d{3}-\d{4}", opened_file) :
-            print(f"Found It! : {match}")
-        
-    print("\n")
-
-"""
-Folder Name: C:\Users\crstn\OneDrive\Desktop\Myprojects\ZeroToHeroPython\Homework\unzipped_instructions\extracted_content\Four
-Files in Folder:
-Found It! : <re.Match object; span=(1062, 1074), match='719-266-2837'>
-"""
+        for match in re.finditer(pattern, opened_file) :
+            print(f"Found It! : \n{match}\nin {folder}\nin {file}")
