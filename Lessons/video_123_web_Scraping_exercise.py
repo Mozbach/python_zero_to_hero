@@ -37,9 +37,21 @@ print(f"Author Quotes List: {quotes_list}")
 
 top_ten_tags = []
 
-top_ten_quotes = soup.select(".tag-item a") # it works here - by not down there.
-print(f"Length of top ten quotes: {len(top_ten_quotes)}")
-
-for i in range(len(top_ten_quotes)) :
-    top_ten_tags.append(top_ten_quotes[i].get_text())
+top_ten_quotes = soup.select(".tags-box .tag-item a") # it works here - by not down there.
 print(f"Top Ten Quotes: {top_ten_quotes}")
+
+for i in soup.find_all("a", href=True) :
+    if "/" not in i['href'][5:-1] and i['href'][5:-1] != "" :
+        print(i['href'][5:-1])
+        top_ten_tags.append(i['href'][5:-1])
+print(f"Top Ten Tags: {top_ten_tags}")
+
+# Well, I mean - I don't think this is the answer they want - but it worked. so
+
+# What is the last one in this:
+# Exercise 5: Notice how there is more than one page, and subsequent pages look like this: http://quotes.toscrape.com/page2/. Use what you know about for loops and string concatenation to loop through all the pages and get all the unique authors on the website. Keep in mind there are many ways to achieve this, also note that you will need to somehow figure out how to check that your loop is on the last page with quptes. For debugging purposes, I will let you know that there are only 10 pages, so the last page is http://quotes.toscrape.com/page/10/, but try to create a loop that is robust enough that it would not matter to know the amount of pages beforehand, perhaps use try/except for this - I will definitely use try/except because I need practice with it.
+
+# Get all the unique authors - use a set. (Duplicates not allowed!)
+# So, first just try to do it for one page, then look back at the for loop in the book part to scrape tutorial to see how to jump through pages. This will be plenty simple.
+
+
