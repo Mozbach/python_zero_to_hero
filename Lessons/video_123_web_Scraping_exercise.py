@@ -77,8 +77,7 @@ import re
 #         return True
 #     else :
 #         return False
-# print(f"select_author_from_soup: {select_author_from_soup}")
-
+# print(f"select_author_from_soup: {select_author_from_soup}"
 def find_all_authors() :
     current_url ="https://quotes.toscrape.com/page/{}/" 
     all_author_set = set() 
